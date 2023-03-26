@@ -1,6 +1,5 @@
 package com.mysite.sbb;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -15,19 +14,28 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class Test009AddAnswer {
 
 	@Autowired
+	private QuestionRepository questionRepository;
+
+	@Autowired
 	private AnswerRepository answerRepository;
-	
+
 	@Test
 	void testAddAnswer() {
-		Optional<Answer> oq = this.answerRepository.findById(2);
+		Optional<Question> oq = this.questionRepository.findById(2);
 		if(oq.isPresent()) {
 			assertTrue(oq.isPresent());
+			Question q = oq.get();
+
+			Answer a = new Answer();
+			a.setContent("네 자동으로 생성됩니다.");
+			a.setQuestion(q);
+			a.setCreateDate(LocalDateTime.now());
+			this.answerRepository.save(a);
 		}
 		else
 		{
-			assertTrue(oq.isPresent());
-			
+			assertFalse(oq.isPresent());
+            System.out.println("아이디를 찾을 수 없습니다");
 		}
 	}
-
 }
