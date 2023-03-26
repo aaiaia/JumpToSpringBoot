@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;//questionRepository/answerRepository 객체를 스프링이 자동으로 생성해주기 위함
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.mysite.sbb.question.Question;
+import com.mysite.sbb.question.QuestionRepository;
+
 @SpringBootTest
 class Test005FindQuestionBySubjectAndContent {
 

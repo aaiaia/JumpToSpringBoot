@@ -12,6 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;/* Set DB Transaction mode, DB session is not closed until methed is closed */
 
+import com.mysite.sbb.question.Question;
+import com.mysite.sbb.question.QuestionRepository;
+import com.mysite.sbb.answer.Answer;
+//import com.mysite.sbb.answer.AnswerRepository;
+
 @SpringBootTest
 public class Test011FindAnserListByQuestion {
 
