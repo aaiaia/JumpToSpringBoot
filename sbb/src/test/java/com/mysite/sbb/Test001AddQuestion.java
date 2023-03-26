@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;//questionReposito
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TestAddQuestion {
+class Test001AddQuestion {
 
 	@Autowired
 	private QuestionRepository questionRepository;

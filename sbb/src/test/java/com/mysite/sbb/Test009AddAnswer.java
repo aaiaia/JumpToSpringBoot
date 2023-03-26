@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;//questionReposito
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class TestAddAnswer {
+public class Test009AddAnswer {
 
 	@Autowired
 	private AnswerRepository answerRepository;

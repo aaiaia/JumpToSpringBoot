@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;//questionReposito
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TestFindAllQuestions {
+class Test002FindAllQuestions {
 
 	@Autowired
 	private QuestionRepository questionRepository;
