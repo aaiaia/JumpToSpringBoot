@@ -39,9 +39,9 @@ public class QuestionContoller {
 		return "question_detail";
 	}
 
-	/* for returning question_form.html to browser */
+	/* for returning question_form.html to browser when QuestionForm has error */
 	@GetMapping("/create")
-	public String questionCreate() {
+	public String questionCreate(QuestionForm questionForm) {
 		System.out.println("called: " + new Object(){}.getClass().getEnclosingMethod().getName() + ", in " + this.getClass().getName());
 		return "question_form";
 	}
