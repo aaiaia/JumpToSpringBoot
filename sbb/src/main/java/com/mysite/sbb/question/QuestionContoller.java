@@ -35,6 +35,13 @@ public class QuestionContoller {
 		return "question_detail";
 	}
 
+	/* for returning question_form.html to browser */
+	@GetMapping("/create")
+	public String questionCreate() {
+		System.out.println("called: " + new Object(){}.getClass().getEnclosingMethod().getName() + ", in " + this.getClass().getName());
+		return "question_form";
+	}
+	/* for create question */
 	@PostMapping("/create")
 	public String questionCreate(@RequestParam String subject, @RequestParam  String content) {
 		System.out.println("called: " + new Object(){}.getClass().getEnclosingMethod().getName() + ", in " + this.getClass().getName());
