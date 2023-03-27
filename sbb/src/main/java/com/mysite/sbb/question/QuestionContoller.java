@@ -5,18 +5,20 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;	// to use path variable
 //import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 
+@RequestMapping("/question")
 @RequiredArgsConstructor
 @Controller
 public class QuestionContoller {
 
 	private final QuestionService questionService;
 
-	@GetMapping("/question/list")
+	@GetMapping("/list")
 	//@ResponseBody
 	public String list(Model model) {
 		List<Question> questionList = this.questionService.getList();
@@ -24,10 +26,15 @@ public class QuestionContoller {
 		return "question_list";
 	}
 
-	@GetMapping(value = "/question/detail/{id}")
+	@GetMapping(value = "/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id) {
 		Question q = questionService.getQuestion(id);
 		model.addAttribute("question", q);
 		return "question_detail";
+	}
+
+	@GetMapping("/create")
+	public String questionCreate( ) {
+		return "question_form";
 	}
 }
