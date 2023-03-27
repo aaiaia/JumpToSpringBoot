@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;	// to getting value
 import org.springframework.web.bind.annotation.PathVariable;	// to use path variable, ex anno.) @GetMapping(value = "/detail/{id}")
 //import org.springframework.web.bind.annotation.ResponseBody;
 
+/* To Check Validation */
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+
 import lombok.RequiredArgsConstructor;
 
 @RequestMapping("/question")
@@ -43,10 +47,18 @@ public class QuestionContoller {
 	}
 	/* for create question */
 	@PostMapping("/create")
+	/*
+	 * Not checking validation
 	public String questionCreate(@RequestParam String subject, @RequestParam  String content) {
+	*/
+	public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) {
 		System.out.println("called: " + new Object(){}.getClass().getEnclosingMethod().getName() + ", in " + this.getClass().getName());
-		// TODO 질문을 저장한다.
-		this.questionService.create(subject, content);
-		return "redirect:/question/list";	// 질문 저장후 질문목록으로 이동
+		if(!bindingResult.hasErrors()) {
+			// TODO 질문을 저장한다.
+			this.questionService.create(questionForm.getSubject(), questionForm.getContent());
+			return "redirect:/question/list";	// 질문 저장후 질문목록으로 이동
+		} else {
+			return "question_form";
+		}
 	}
 }
