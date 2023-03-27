@@ -2,12 +2,15 @@
 <div layout:fragment="content" class="container">
 	<h5 class="my-3 border-bottom pb-2">질문등록</h5>
 	<!-- Create Question -->
-	<form th:action="@{/question/create}" method="post">
-		<div class="my-3">
-			<label for="subject" class="form-label">제목</label>
-			<input type="text" name="subject" id="subject" class="form-constol">
+	<form th:action="@{/question/create}" th:object="${questionForm}" method="post">
+		<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+			<div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
 		</div>
-		<div class="my-3">
+		<div class="mb-3">
+			<label for="subject" class="form-label">제목</label>
+			<input type="text" name="subject" id="subject" class="form-control">
+		</div>
+		<div class="mb-3">
 			<label for="content" class="form-label">내용</label>
 			<textarea name="content" id="content" rows="10" class="form-control"></textarea>
 		</div>
