@@ -1,6 +1,9 @@
+<!-- Previous codes, set styleshhet directly
 <link rel="stylesheet" type="text/css" th:href="@{/bootstrap-5.2.3-dist/css/bootstrap.min.css}">
+-->
+<html layout:decorate="~{layout}">
 <h2><center>질의응답 게시판</center></h2>
-<div class="container my-3">
+<div layout:fragment="content" class="container my-3">
 	<table class="table">
 		<thead class="table-dark">
 			<tr>
@@ -20,3 +23,4 @@
 		</tbody>
 	</table>
 </div>
+</html>
