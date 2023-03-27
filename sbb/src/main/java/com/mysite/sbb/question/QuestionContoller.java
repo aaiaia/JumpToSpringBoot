@@ -46,6 +46,7 @@ public class QuestionContoller {
 	public String questionCreate(@RequestParam String subject, @RequestParam  String content) {
 		System.out.println("called: " + new Object(){}.getClass().getEnclosingMethod().getName() + ", in " + this.getClass().getName());
 		// TODO 질문을 저장한다.
+		this.questionService.create(subject, content);
 		return "redirect:/question/list";	// 질문 저장후 질문목록으로 이동
 	}
 }
