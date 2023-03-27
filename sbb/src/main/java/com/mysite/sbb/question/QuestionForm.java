@@ -14,5 +14,5 @@ public class QuestionForm {
 	private String subject;
 
 	@NotEmpty(message="내용은 필수할목입니다.")
-	private String Content;
+	private String content;
 }

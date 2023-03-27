@@ -17,6 +17,8 @@ import org.springframework.validation.BindingResult;
 
 import lombok.RequiredArgsConstructor;
 
+import com.mysite.sbb.answer.AnswerForm;
+
 @RequestMapping("/question")
 @RequiredArgsConstructor
 @Controller
@@ -33,7 +35,7 @@ public class QuestionContoller {
 	}
 
 	@GetMapping(value = "/detail/{id}")
-	public String detail(Model model, @PathVariable("id") Integer id) {
+	public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
 		Question q = questionService.getQuestion(id);
 		model.addAttribute("question", q);
 		return "question_detail";
