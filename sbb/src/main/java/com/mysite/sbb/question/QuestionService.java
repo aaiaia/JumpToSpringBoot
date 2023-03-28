@@ -1,12 +1,14 @@
 package com.mysite.sbb.question;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.time.LocalDateTime;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +27,10 @@ public class QuestionService {
 	}
 
 	public Page<Question> getList(int page){
-		Pageable pageable = PageRequest.of(page, 10);
+		int numOfListInPage = 10;
+		List<Sort.Order> sort = new ArrayList();
+		sort.add(Sort.Order.desc("createDate"));
+		Pageable pageable = PageRequest.of(page, numOfListInPage, Sort.by(sort));
 		return this.questionRepository.findAll(pageable);
 	}
 
