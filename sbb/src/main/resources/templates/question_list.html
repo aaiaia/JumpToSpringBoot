@@ -30,10 +30,11 @@
 						<span>이전</span>
 					</a>
 				</li>
-				<li th:each="page : ${#numbers.sequence(0, paging.totalPages-1)}"
-					th:classappend="${page == paging.number} ? 'active'"
+				<li th:each="page_idx : ${#numbers.sequence(0, paging.totalPages-1)}"
+					th:classappend="${page_idx == paging.number} ? 'active'"
+					th:if="${paging.number-5 <= page_idx and page_idx <= paging.number+5}"
 					class="page-item">
-					<a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+					<a th:text="${page_idx}" class="page-link" th:href="@{|?page=${page_idx}|}"></a>
 				</li>
 				<li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
 					<a th:href="@{|?page=${paging.number+1}|}">
