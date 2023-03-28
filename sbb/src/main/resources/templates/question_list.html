@@ -1,0 +1,57 @@
+<!-- Previous codes, set styleshhet directly
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap-5.2.3-dist/css/bootstrap.min.css}">
+-->
+<html layout:decorate="~{layout}">
+<h2><center>질의응답 게시판</center></h2>
+<div layout:fragment="content" class="container my-3">
+	<table class="table">
+		<thead class="table-dark">
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성일자</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="question : ${paging}">
+				<td th:text="${question.id}"></td>
+				<td>
+					<a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+					<!-- Displaying number of reply(answer) Start ms-2 is mean that spacier in left -->
+					<span class="text-danger small ms-2"
+						th:if="${#lists.size(question.answerList) > 0}"
+						th:text="${#lists.size(question.answerList)}">
+					</span>
+					<!-- Displaying number of reply(answer) End -->
+				</td>
+				<td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- Paging Handling Start -->
+	<div th:if="${!paging.isEmpty()}">
+			<ul class="pagination justify-content-center">
+				<li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+					<a class="page-link" th:href="@{|?page=${paging.number-1}|}">
+						<span>이전</span>
+					</a>
+				</li>
+				<li th:each="page_idx : ${#numbers.sequence(0, paging.totalPages-1)}"
+					th:classappend="${page_idx == paging.number} ? 'active'"
+					th:if="${paging.number-5 <= page_idx and page_idx <= paging.number+5}"
+					class="page-item">
+					<a th:text="${page_idx}" class="page-link" th:href="@{|?page=${page_idx}|}"></a>
+				</li>
+				<li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+					<a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+						<span>다음</span>
+					</a>
+				</li>
+			</ul>
+	</div>
+	<!-- Paging Handling End -->
+	<!-- Create Question Buttun Start -->
+	<a th:href="@{/question/create}" class="btn btn-primary">질문 등록하기</a>
+	<!-- Create Question Buttun End -->
+</div>
+</html>
