@@ -7,9 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestParam;	// to getting values from args of method, ex anno.) METHOD_NAME(@RequestParam String subject, ...)
+import org.springframework.web.bind.annotation.RequestParam;	// to getting values from args of method, ex anno.) METHOD_NAME(@RequestParam String subject, ...)
 import org.springframework.web.bind.annotation.PathVariable;	// to use path variable, ex anno.) @GetMapping(value = "/detail/{id}")
 //import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.data.domain.Page;
 
 /* To Check Validation */
 import jakarta.validation.Valid;
@@ -26,11 +27,20 @@ public class QuestionContoller {
 
 	private final QuestionService questionService;
 
+	/*
+	 * previous function
 	@GetMapping("/list")
 	//@ResponseBody
 	public String list(Model model) {
 		List<Question> questionList = this.questionService.getList();
 		model.addAttribute("questionList", questionList);
+		return "question_list";
+	}
+	 */
+	@GetMapping("/list")
+	public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+		Page<Question> paging = this.questionService.getList(page);
+		model.addAttribute("paging", paging);
 		return "question_list";
 	}
 
