@@ -19,7 +19,7 @@ public class SiteUserContoller {
 
 	@GetMapping("/signup")
 	public String signup(SiteUserCreateForm siteUserCreateForm) {
-		return "sigup_form";
+		return "signup_form";
 	}
 
 	@PostMapping("/signup")
