@@ -1,6 +1,6 @@
 package com.mysite.sbb.user;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -9,12 +9,12 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class SiteUserService {
 	private final SiteUserRepository siteUserRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	public SiteUser create(String username, String password, String email) {
-		BCryptPasswordEncoder passwdEncoder = new BCryptPasswordEncoder();
 		SiteUser user = new SiteUser();
 		user.setUsername(username);
-		user.setPassword(passwdEncoder.encode(password));
+		user.setPassword(passwordEncoder.encode(password));
 		user.setEmail(email);
 
 		siteUserRepository.save(user);
