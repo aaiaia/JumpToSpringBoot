@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -33,7 +34,17 @@ public class SiteUserContoller {
 			return "signup_form";
 		}
 
-		siteUserService.create(siteUserCreateForm.getUsername(), siteUserCreateForm.getPassword1(), siteUserCreateForm.getEmail());
+		try {
+			siteUserService.create(siteUserCreateForm.getUsername(), siteUserCreateForm.getPassword1(), siteUserCreateForm.getEmail());
+		}catch(org.springframework.dao.DataIntegrityViolationException e) {
+			e.printStackTrace();
+			bindingResult.reject("signupDuplicatedID", "이미 등록된 사용자입니다.");
+			return "signup_form";
+		}catch(Exception e) {
+			e.printStackTrace();
+			bindingResult.reject("signupFailed", e.getMessage());
+			return "signup_form";
+		}
 
 		return "redirect:/";
 	}
