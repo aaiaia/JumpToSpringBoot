@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
+/* For Crypto */
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -26,4 +29,9 @@ public class SecurityConfig {
 		return http.build();
 	}
 
+	/* For using commonly... passwd encoding */
+	@Bean
+	PasswordEncoder passwdEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }
