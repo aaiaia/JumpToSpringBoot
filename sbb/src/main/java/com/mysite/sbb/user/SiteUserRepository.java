@@ -1,5 +1,9 @@
 package com.mysite.sbb.user;
 
-public interface SiteUserRepository {
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SiteUserRepository extends JpaRepository<SiteUser, Long>{
 
 }
