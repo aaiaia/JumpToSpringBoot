@@ -49,7 +49,7 @@ public class SiteUserContoller {
 		return "redirect:/";
 	}
 
-	@GetMapping("/user/login")
+	@GetMapping("/login")
 	public String login() {
 		return "login_form";
 	}
