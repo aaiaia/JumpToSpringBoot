@@ -16,7 +16,7 @@
 		<tbody>
 			<tr class="text-center" th:each="question : ${paging}">
 				<td th:text="${question.id}"></td>
-				<td>
+				<td class="text-start">
 					<a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
 					<!-- Displaying number of reply(answer) Start ms-2 is mean that spacier in left -->
 					<span class="text-danger small ms-2"
