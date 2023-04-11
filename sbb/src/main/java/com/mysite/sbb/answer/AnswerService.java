@@ -14,14 +14,14 @@ public class AnswerService {
 	private final AnswerRepository answerRepository;
 
 	public void create(Question question, String content) {
-        /* Just Debugging */
+		/* Just Debugging */
 		System.out.println("called: " + new Object(){}.getClass().getEnclosingMethod().getName() + ", in " + this.getClass().getName());
-        /* Make Answer() and set Object values */
+		/* Make Answer() and set Object values */
 		Answer answer = new Answer();
 		answer.setCreateDate(LocalDateTime.now());
 		answer.setContent(content);
 		answer.setQuestion(question);
-        /* Saving answer using answerRepository(), kind of interface */
+		/* Saving answer using answerRepository(), kind of interface */
 		answerRepository.save(answer);
 	}
 }
