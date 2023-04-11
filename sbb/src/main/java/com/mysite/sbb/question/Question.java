@@ -10,11 +10,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import com.mysite.sbb.answer.Answer;
+import com.mysite.sbb.user.SiteUser;
 
 @Getter
 @Setter
@@ -23,15 +25,18 @@ public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
-	
+
 	@Column(length = 200)
 	private String subject;
-	
+
 	@Column(columnDefinition = "TEXT")
 	private String content;
-	
+
 	private LocalDateTime createDate;
-	
+
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
-	private List<Answer> answerList; 
+	private List<Answer> answerList;
+
+	@ManyToOne
+	SiteUser author;
 }
