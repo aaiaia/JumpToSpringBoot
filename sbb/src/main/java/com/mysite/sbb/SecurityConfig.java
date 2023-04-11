@@ -10,6 +10,9 @@ import org.springframework.security.web.header.writers.frameoptions.XFrameOption
 /* For Crypto */
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+/* For User login(Authorization */
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 
 @Configuration
 @EnableWebSecurity
@@ -37,5 +40,11 @@ public class SecurityConfig {
 	@Bean
 	PasswordEncoder passwdEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	/* For User Authorization, with interface UserDetailsService @ SiteUserSecurityService.java */
+	@Bean
+	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+		return authenticationConfiguration.getAuthenticationManager();
 	}
 }
