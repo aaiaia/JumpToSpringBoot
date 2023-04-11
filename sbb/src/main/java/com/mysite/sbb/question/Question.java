@@ -33,6 +33,7 @@ public class Question {
 	private String content;
 
 	private LocalDateTime createDate;
+	private LocalDateTime modifiedDate;
 
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 	private List<Answer> answerList;

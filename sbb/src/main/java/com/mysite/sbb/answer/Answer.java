@@ -27,6 +27,7 @@ public class Answer {
 	private String content;
 
 	private LocalDateTime createDate;
+	private LocalDateTime modifiedDate;
 
 	@ManyToOne
 	private Question question;
