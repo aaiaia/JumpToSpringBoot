@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 /* To Get user(spring security) */
 import java.security.Principal;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.mysite.sbb.answer.AnswerForm;
 
@@ -61,12 +62,14 @@ public class QuestionContoller {
 
 	/* for returning question_form.html to browser when QuestionForm has error */
 	@GetMapping("/create")
+	@PreAuthorize("isAuthenticated")
 	public String questionCreate(QuestionForm questionForm) {
 		System.out.println("called: " + new Object(){}.getClass().getEnclosingMethod().getName() + ", in " + this.getClass().getName());
 		return "question_form";
 	}
 	/* for create question */
 	@PostMapping("/create")
+	@PreAuthorize("isAuthenticated")
 	/*
 	 * Not checking validation
 	public String questionCreate(@RequestParam String subject, @RequestParam  String content) {

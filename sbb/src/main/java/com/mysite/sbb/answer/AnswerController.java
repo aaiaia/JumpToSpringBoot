@@ -1,6 +1,7 @@
 package com.mysite.sbb.answer;
 
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.validation.BindingResult;
 
 /* To Get user(spring security) */
 import java.security.Principal;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.mysite.sbb.question.Question;
 //import com.mysite.sbb.question.QuestionForm;
@@ -33,6 +35,7 @@ public class AnswerController {
 	private final SiteUserService siteUserService;
 
 	@PostMapping("/create/{id}")
+	@PreAuthorize("isAuthenticated")
 	/*
 	 * previous method declare
 	public String createAnswer(Model model, @PathVariable("id") Integer id, @RequestParam String content) {
