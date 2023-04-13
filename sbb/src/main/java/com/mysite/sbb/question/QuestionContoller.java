@@ -18,7 +18,15 @@ import org.springframework.validation.BindingResult;
 
 import lombok.RequiredArgsConstructor;
 
+/* To Get user(spring security) */
+import java.security.Principal;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import com.mysite.sbb.answer.AnswerForm;
+
+/* for SiteUser(author) */
+import com.mysite.sbb.user.SiteUser;
+import com.mysite.sbb.user.SiteUserService;
 
 @RequestMapping("/question")
 @RequiredArgsConstructor
@@ -26,6 +34,7 @@ import com.mysite.sbb.answer.AnswerForm;
 public class QuestionContoller {
 
 	private final QuestionService questionService;
+	private final SiteUserService siteUserService;
 
 	/*
 	 * previous function
@@ -53,21 +62,25 @@ public class QuestionContoller {
 
 	/* for returning question_form.html to browser when QuestionForm has error */
 	@GetMapping("/create")
+	@PreAuthorize("isAuthenticated")
 	public String questionCreate(QuestionForm questionForm) {
 		System.out.println("called: " + new Object(){}.getClass().getEnclosingMethod().getName() + ", in " + this.getClass().getName());
 		return "question_form";
 	}
 	/* for create question */
 	@PostMapping("/create")
+	@PreAuthorize("isAuthenticated")
 	/*
 	 * Not checking validation
 	public String questionCreate(@RequestParam String subject, @RequestParam  String content) {
 	*/
-	public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) {
-		System.out.println("called: " + new Object(){}.getClass().getEnclosingMethod().getName() + ", in " + this.getClass().getName());
+	public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
+		//System.out.println("called: " + new Object(){}.getClass().getEnclosingMethod().getName() + ", in " + this.getClass().getName());
+
+		SiteUser siteUser = siteUserService.getUser(principal.getName());
 		if(!bindingResult.hasErrors()) {
 			// TODO 질문을 저장한다.
-			this.questionService.create(questionForm.getSubject(), questionForm.getContent());
+			this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
 			return "redirect:/question/list";	// 질문 저장후 질문목록으로 이동
 		} else {
 			return "question_form";

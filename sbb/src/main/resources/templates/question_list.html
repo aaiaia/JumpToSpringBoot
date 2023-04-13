@@ -6,16 +6,17 @@
 <div layout:fragment="content" class="container my-3">
 	<table class="table">
 		<thead class="table-dark">
-			<tr>
+			<tr class="text-center">
 				<th>번호</th>
-				<th>제목</th>
+				<th style=width:50%"">제목</th>
+				<th>글쓴이</th>
 				<th>작성일자</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="question : ${paging}">
+			<tr class="text-center" th:each="question : ${paging}">
 				<td th:text="${question.id}"></td>
-				<td>
+				<td class="text-start">
 					<a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
 					<!-- Displaying number of reply(answer) Start ms-2 is mean that spacier in left -->
 					<span class="text-danger small ms-2"
@@ -24,6 +25,7 @@
 					</span>
 					<!-- Displaying number of reply(answer) End -->
 				</td>
+				<td><span th:if="${question.author != null}" th:text="${question.author.username}"></span></td>
 				<td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
 			</tr>
 		</tbody>
